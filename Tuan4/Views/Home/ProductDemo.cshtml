@@ -1,0 +1,60 @@
+@model IEnumerable<Tuan4.Models.Product>
+@{
+    ViewData["Title"] = "Sản phẩm";
+}
+
+<div class="row" style="margin-top: 15px;">
+    <div class="col-md-3">
+        <partial name="_CategoryPartial" />
+    </div>
+
+    <div class="col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-heading" style="background-color: #3498db; color: #fff; font-weight: bold;">
+                <h3 class="panel-title" style="font-size: 16px; font-weight: bold;">Sản phẩm mới nhất</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <div class="thumbnail" style="text-align: center; border: 1px solid #e0e0e0; border-radius: 6px;">
+                                <img src="@item.Image" alt="@item.Name" class="img-responsive" style="height: 180px; margin: 0 auto;" />
+                                <div class="caption">
+                                    <h4 style="font-size: 15px; font-weight: 600; color: #2c3e50; min-height: 40px;">@item.Name</h4>
+                                    <p style="color: #e74c3c; font-size: 16px; font-weight: bold;">@item.Price.ToString("N0") đ</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading" style="background-color: #2980b9; color: #fff; font-weight: bold;">
+                <h3 class="panel-title" style="font-size: 16px; font-weight: bold;">Sản phẩm nổi bật</h3>
+            </div>
+            <div class="panel-body">
+                @await Component.InvokeAsync("HotProduct")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="background-color: #222; color: #bbb; padding: 25px 20px; margin-top: 30px; border-radius: 4px;">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 style="color: #fff; font-weight: bold; text-transform: uppercase;">Giới thiệu</h4>
+            <p style="font-size: 13px; line-height: 1.6;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ab suscipit deserunt mollitia reiciendis, nobis iure aliquam velit et laboriosam ducimus veritatis corporis est, dolores aperiam! Officiis impedit provident laboriosam.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h4 style="color: #fff; font-weight: bold; text-transform: uppercase;">Liên hệ</h4>
+            <p style="font-size: 13px; line-height: 1.6;">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit amet suscipit quasi quisquam impedit magni molestias. Dolores, aliquid commodi ut esse eos voluptatem nisi facilis dolorem, repudiandae culpa ea quidem.
+            </p>
+        </div>
+    </div>
+</div>

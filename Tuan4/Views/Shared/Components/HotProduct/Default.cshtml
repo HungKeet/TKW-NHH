@@ -1,0 +1,16 @@
+@model IEnumerable<Tuan4.Models.Product>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="thumbnail" style="text-align: center; border: 1px solid #e0e0e0; border-radius: 6px;">
+                <img src="@item.Image" alt="@item.Name" class="img-responsive" style="height: 180px; margin: 0 auto;" />
+                <div class="caption">
+                    <h4 style="font-size: 15px; font-weight: 600; color: #2c3e50; min-height: 40px;">@item.Name</h4>
+                    <p style="color: #e74c3c; font-size: 16px; font-weight: bold;">@item.Price.ToString("N0") đ</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

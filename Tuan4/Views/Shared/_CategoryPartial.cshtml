@@ -1,0 +1,22 @@
+@using Tuan4.Models
+@{
+    var categories = Product.GetCategories();
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading" style="background-color: #2980b9; border-color: #2980b9;">
+        <h4 class="panel-title" style="font-weight: bold;">Danh mục sản phẩm</h4>
+    </div>
+    <ul class="list-group">
+        @foreach (var cat in categories)
+        {
+            <li class="list-group-item">
+                <a href="#" style="color: #333; text-decoration: none; display: block;">@cat</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<div class="thumbnail" style="padding: 0; border: none; box-shadow: none;">
+    <img src="~/images/products/promo_banner.jpg" alt="Đổi cũ lấy mới" class="img-responsive" style="border-radius: 6px; width: 100%;" />
+</div>
