@@ -1,0 +1,16 @@
+@*Nếu đưa dữ liệu qua Model chúng ta còn có thể sử dụng các sau*@
+@model Tuan6.Models.DataModels.Member;
+@{
+    ViewData["Title"] = "Thông tin thành viên";
+    //Nếu đưa dữ liệu qua ViewBag thì chuyển kiểu
+    // var member = ViewBag.member as Tuan6.Models.DataModels.Member;
+
+    //Nếu đưa dữ liệu qua Model thì chuyển kiểu
+    var member = Model as Tuan6.Models.DataModels.Member;
+}
+<h2>Thông tin Member</h2>
+<p>Member Id: @member?.MemberId</p>
+<p>Username: @Model.Username</p>
+<p>Password: @Model.Password</p>
+<p>Fullname: @Model.Fullname</p>
+<p>Email: @Model.Email</p>
