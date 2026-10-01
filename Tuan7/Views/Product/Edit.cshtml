@@ -1,0 +1,73 @@
+@model Tuan7.Models.Product
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sản phẩm";
+}
+
+<h2>Chỉnh sửa sản phẩm</h2>
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Image" />
+
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label fw-bold"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label fw-bold"></label>
+                <input asp-for="Price" type="number" step="1000" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="SalePrice" class="control-label fw-bold"></label>
+                <input asp-for="SalePrice" type="number" step="1000" class="form-control" />
+                <span asp-validation-for="SalePrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId" class="control-label fw-bold"></label>
+                <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-select"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label fw-bold">Hình ảnh hiện tại</label>
+                <div class="mb-2">
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <img src="~/products/@Model.Image" alt="@Model.Name" class="img-thumbnail" style="max-height: 100px;" onerror="this.src='https://placehold.co/100x100?text=No+Image';" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Chưa có ảnh</span>
+                    }
+                </div>
+                <label class="control-label fw-bold">Chọn ảnh mới (nếu muốn thay đổi)</label>
+                <input type="file" name="ImageFile" class="form-control" accept="image/*" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="control-label fw-bold"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3 mb-3">
+                <input type="submit" value="Cập nhật" class="btn btn-warning" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại danh sách</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

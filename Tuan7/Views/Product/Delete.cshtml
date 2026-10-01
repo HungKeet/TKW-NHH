@@ -1,0 +1,41 @@
+@model Tuan7.Models.Product
+
+@{
+    ViewData["Title"] = "Xóa sản phẩm";
+}
+
+<h2 class="text-danger">Xóa sản phẩm</h2>
+<h4>Bạn có chắc chắn muốn xóa sản phẩm này không?</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4 mb-3">
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <img src="~/products/@Model.Image" alt="@Model.Name" class="img-fluid rounded shadow-sm" onerror="this.src='https://placehold.co/300x300?text=No+Image';" />
+        }
+    </div>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Id)</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd class="col-sm-9">@Model.Name</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CategoryId)</dt>
+            <dd class="col-sm-9">@ViewBag.CategoryName</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+            <dd class="col-sm-9">@Model.Price.ToString("N0") đ</dd>
+
+            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.SalePrice)</dt>
+            <dd class="col-sm-9">@Model.SalePrice.ToString("N0") đ</dd>
+        </dl>
+        
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+            <a asp-action="Index" class="btn btn-secondary ms-2">Hủy bỏ</a>
+        </form>
+    </div>
+</div>

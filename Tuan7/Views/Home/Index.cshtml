@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Bài thực hành 05 - Data Validate & Annotation";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-6 fw-bold">Bài thực hành 05 - Data Validate & Annotation</h1>
+        <p class="col-md-8 fs-5">Bài tập Tuần 7: Lập trình Web ASP.NET Core MVC</p>
+        <hr class="my-4" />
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary">Bài 1: Form Account & Annotation Validate</h5>
+                        <p class="card-text">
+                            - Validate dữ liệu sử dụng DataAnnotations (Required, MinLength, MaxLength, EmailAddress, RegularExpression...)<br />
+                            - Remote validation kiểm tra số điện thoại (VerifyPhone action trong AccountController).
+                        </p>
+                        <a asp-controller="Account" asp-action="Index" class="btn btn-outline-primary">Xem danh sách Account</a>
+                        <a asp-controller="Account" asp-action="Create" class="btn btn-primary">Thêm mới Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-success">Bài tập tự làm thêm: Category & Product</h5>
+                        <p class="card-text">
+                            - Quản lý Category và Product (CRUD đầy đủ).<br />
+                            - Ràng buộc giá chuẩn >= 100.000, giá khuyến mãi không âm và nhỏ hơn giá chuẩn ít nhất 10%.<br />
+                            - Upload hình ảnh sản phẩm vào thư mục <code>wwwroot/products</code>.<br />
+                            - Kiểm tra từ nhạy cảm trong mô tả sản phẩm.
+                        </p>
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-success">Xem danh sách Product</a>
+                        <a asp-controller="Product" asp-action="Create" class="btn btn-success">Thêm mới Product</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
