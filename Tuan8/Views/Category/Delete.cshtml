@@ -1,0 +1,48 @@
+@model Tuan8.Models.DataModels.Category
+
+@{
+    ViewData["Title"] = "Xóa Loại sách";
+}
+
+<div class="container mt-4" style="max-width: 600px;">
+    <div class="card border-danger shadow">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Xác nhận xóa Loại sách</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.Books != null && Model.Books.Any())
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Chú ý:</strong> Loại sách này hiện đang có <strong>@Model.Books.Count</strong> cuốn sách liên kết. Bạn cần xóa hoặc chuyển các sách sang loại khác trước khi xóa loại này.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    Bạn có chắc chắn muốn xóa loại sách này không?
+                </div>
+            }
+
+            <dl class="row">
+                <dt class="col-sm-4">Mã loại:</dt>
+                <dd class="col-sm-8 fw-bold">@Model.CategoryId</dd>
+
+                <dt class="col-sm-4">Tên loại sách:</dt>
+                <dd class="col-sm-8 text-primary fw-bold">@Model.CategoryName</dd>
+            </dl>
+
+            <form asp-action="Delete" class="d-flex justify-content-between mt-4">
+                <input type="hidden" asp-for="CategoryId" />
+                <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+                @if (Model.Books == null || !Model.Books.Any())
+                {
+                    <button type="submit" class="btn btn-danger px-4">Xóa loại này</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-danger px-4" disabled>Không thể xóa (Đang có sách)</button>
+                }
+            </form>
+        </div>
+    </div>
+</div>

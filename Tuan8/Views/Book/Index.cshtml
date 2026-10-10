@@ -1,0 +1,113 @@
+@model IEnumerable<Tuan8.Models.DataModels.Book>
+
+@{
+    ViewData["Title"] = "Danh sách Sách";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2><i class="bi bi-book"></i> Danh sách Sách</h2>
+        <a asp-action="Create" class="btn btn-primary">
+            + Thêm sách mới
+        </a>
+    </div>
+
+    <!-- Thanh tìm kiếm và lọc theo danh mục -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form asp-action="Index" method="get" class="row g-3">
+                <div class="col-md-5">
+                    <input type="text" name="searchString" value="@ViewBag.CurrentSearch" class="form-control" placeholder="Tìm theo tên sách hoặc tác giả..." />
+                </div>
+                <div class="col-md-4">
+                    <select name="categoryId" class="form-select">
+                        <option value="">-- Tất cả loại sách --</option>
+                        @if (ViewBag.Categories != null)
+                        {
+                            foreach (var cat in (IEnumerable<Tuan8.Models.DataModels.Category>)ViewBag.Categories)
+                            {
+                                if (ViewBag.CurrentCategory != null && (int)ViewBag.CurrentCategory == cat.CategoryId)
+                                {
+                                    <option value="@cat.CategoryId" selected>@cat.CategoryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@cat.CategoryId">@cat.CategoryName</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Đặt lại</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bảng danh sách sách -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle shadow-sm bg-white">
+            <thead class="table-dark">
+                <tr class="text-center">
+                    <th>Mã sách</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên sách</th>
+                    <th>Tác giả</th>
+                    <th>Năm XB</th>
+                    <th>Giá bán</th>
+                    <th>Loại sách</th>
+                    <th>Nhà xuất bản</th>
+                    <th style="width: 200px;">Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center fw-bold">@item.BookId</td>
+                            <td class="text-center">
+                                @if (!string.IsNullOrEmpty(item.Picture))
+                                {
+                                    <img src="~/images/@item.Picture" alt="@item.Title" class="img-thumbnail" style="width: 60px; height: 80px; object-fit: cover;" onerror="this.onerror=null;this.src='/images/book1.jpg';" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Không có ảnh</span>
+                                }
+                            </td>
+                            <td>
+                                <strong>@item.Title</strong>
+                                @if (!string.IsNullOrEmpty(item.Description))
+                                {
+                                    <div class="text-muted small text-truncate" style="max-width: 250px;">@item.Description</div>
+                                }
+                            </td>
+                            <td>@item.Author</td>
+                            <td class="text-center">@item.Release</td>
+                            <td class="text-end text-danger fw-bold">@(item.Price.HasValue ? string.Format("{0:N0} đ", item.Price.Value) : "Chưa có")</td>
+                            <td>@(item.Category != null ? item.Category.CategoryName : "N/A")</td>
+                            <td>@(item.Publisher != null ? item.Publisher.PublisherName : "N/A")</td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm">
+                                    <a asp-action="Edit" asp-route-id="@item.BookId" class="btn btn-warning">Sửa</a>
+                                    <a asp-action="Details" asp-route-id="@item.BookId" class="btn btn-info text-white">Chi tiết</a>
+                                    <a asp-action="Delete" asp-route-id="@item.BookId" class="btn btn-danger">Xóa</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9" class="text-center py-4 text-muted">Không tìm thấy sách nào phù hợp.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

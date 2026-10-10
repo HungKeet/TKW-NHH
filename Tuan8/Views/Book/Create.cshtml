@@ -1,0 +1,86 @@
+@model Tuan8.Models.DataModels.Book
+
+@{
+    ViewData["Title"] = "Thêm mới Sách";
+}
+
+<div class="container mt-4" style="max-width: 800px;">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Thêm mới Sách</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="BookId" class="form-label fw-bold">Mã sách (*)</label>
+                        <input asp-for="BookId" class="form-control" placeholder="Ví dụ: B004" />
+                        <span asp-validation-for="BookId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Title" class="form-label fw-bold">Tên sách (*)</label>
+                        <input asp-for="Title" class="form-control" placeholder="Nhập tên sách" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Author" class="form-label fw-bold">Tác giả</label>
+                        <input asp-for="Author" class="form-control" placeholder="Tác giả" />
+                        <span asp-validation-for="Author" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Release" class="form-label fw-bold">Năm xuất bản</label>
+                        <input asp-for="Release" type="number" class="form-control" placeholder="2024" />
+                        <span asp-validation-for="Release" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="Price" class="form-label fw-bold">Giá bán (VNĐ)</label>
+                        <input asp-for="Price" type="number" step="1000" class="form-control" placeholder="100000" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="CategoryId" class="form-label fw-bold">Loại sách</label>
+                        <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId">
+                            <option value="">-- Chọn loại sách --</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="PublisherId" class="form-label fw-bold">Nhà xuất bản</label>
+                        <select asp-for="PublisherId" class="form-select" asp-items="ViewBag.PublisherId">
+                            <option value="">-- Chọn nhà xuất bản --</option>
+                        </select>
+                        <span asp-validation-for="PublisherId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Hình ảnh đại diện</label>
+                    <input type="file" name="fileImage" class="form-control" accept="image/*" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-bold">Mô tả tóm tắt</label>
+                    <textarea asp-for="Description" class="form-control" rows="4" placeholder="Nhập mô tả nội dung cuốn sách..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+                    <button type="submit" class="btn btn-primary px-4">Lưu sách</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

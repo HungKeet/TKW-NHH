@@ -1,0 +1,54 @@
+@model Tuan8.Models.DataModels.Publisher
+
+@{
+    ViewData["Title"] = "Xóa Nhà xuất bản";
+}
+
+<div class="container mt-4" style="max-width: 650px;">
+    <div class="card border-danger shadow">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Xác nhận xóa Nhà xuất bản</h4>
+        </div>
+        <div class="card-body">
+            @if (Model.Books != null && Model.Books.Any())
+            {
+                <div class="alert alert-danger" role="alert">
+                    <strong>Chú ý:</strong> Nhà xuất bản này hiện đang có <strong>@Model.Books.Count</strong> cuốn sách liên kết. Bạn cần xóa hoặc chuyển các sách sang nhà xuất bản khác trước khi xóa nhà xuất bản này.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    Bạn có chắc chắn muốn xóa nhà xuất bản này không?
+                </div>
+            }
+
+            <dl class="row">
+                <dt class="col-sm-4">Mã NXB:</dt>
+                <dd class="col-sm-8 fw-bold">@Model.PublisherId</dd>
+
+                <dt class="col-sm-4">Tên NXB:</dt>
+                <dd class="col-sm-8 text-primary fw-bold">@Model.PublisherName</dd>
+
+                <dt class="col-sm-4">Điện thoại:</dt>
+                <dd class="col-sm-8">@(Model.Phone ?? "N/A")</dd>
+
+                <dt class="col-sm-4">Địa chỉ:</dt>
+                <dd class="col-sm-8">@(Model.Address ?? "N/A")</dd>
+            </dl>
+
+            <form asp-action="Delete" class="d-flex justify-content-between mt-4">
+                <input type="hidden" asp-for="PublisherId" />
+                <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+                @if (Model.Books == null || !Model.Books.Any())
+                {
+                    <button type="submit" class="btn btn-danger px-4">Xóa nhà xuất bản này</button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-danger px-4" disabled>Không thể xóa (Đang có sách)</button>
+                }
+            </form>
+        </div>
+    </div>
+</div>

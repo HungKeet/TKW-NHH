@@ -1,0 +1,58 @@
+@model Tuan8.Models.DataModels.Book
+
+@{
+    ViewData["Title"] = "Xác nhận xóa Sách";
+}
+
+<div class="container mt-4" style="max-width: 700px;">
+    <div class="card border-danger shadow">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">Xác nhận xóa Sách</h4>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-warning" role="alert">
+                <strong>Cảnh báo:</strong> Bạn có chắc chắn muốn xóa cuốn sách này khỏi cơ sở dữ liệu không? Hành động này không thể hoàn tác.
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center mb-3">
+                    @if (!string.IsNullOrEmpty(Model.Picture))
+                    {
+                        <img src="~/images/@Model.Picture" alt="@Model.Title" class="img-fluid rounded border" style="max-height: 200px;" onerror="this.onerror=null;this.src='/images/book1.jpg';" />
+                    }
+                    else
+                    {
+                        <div class="bg-light p-4 rounded border text-muted">Không có ảnh</div>
+                    }
+                </div>
+                <div class="col-md-8">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4">Mã sách:</dt>
+                        <dd class="col-sm-8 fw-bold">@Model.BookId</dd>
+
+                        <dt class="col-sm-4">Tên sách:</dt>
+                        <dd class="col-sm-8 text-primary fw-bold">@Model.Title</dd>
+
+                        <dt class="col-sm-4">Tác giả:</dt>
+                        <dd class="col-sm-8">@(Model.Author ?? "Chưa rõ")</dd>
+
+                        <dt class="col-sm-4">Giá bán:</dt>
+                        <dd class="col-sm-8 text-danger fw-bold">@(Model.Price.HasValue ? string.Format("{0:N0} đ", Model.Price.Value) : "Chưa có")</dd>
+
+                        <dt class="col-sm-4">Loại sách:</dt>
+                        <dd class="col-sm-8">@(Model.Category != null ? Model.Category.CategoryName : "N/A")</dd>
+
+                        <dt class="col-sm-4">Nhà xuất bản:</dt>
+                        <dd class="col-sm-8">@(Model.Publisher != null ? Model.Publisher.PublisherName : "N/A")</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <form asp-action="Delete" class="mt-4 d-flex justify-content-between">
+                <input type="hidden" asp-for="BookId" />
+                <a asp-action="Index" class="btn btn-secondary">Hủy bỏ, quay lại</a>
+                <button type="submit" class="btn btn-danger px-4">Xác nhận xóa</button>
+            </form>
+        </div>
+    </div>
+</div>
