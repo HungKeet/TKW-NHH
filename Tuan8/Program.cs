@@ -3,7 +3,7 @@ using Tuan8.Models.BusinessModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("BookStoreString");
@@ -12,7 +12,6 @@ builder.Services.AddDbContext<BookManagementContext>(options =>
 
 var app = builder.Build();
 
-// Tự động kiểm tra và cập nhật database migration khi chạy ứng dụng
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<BookManagementContext>();
