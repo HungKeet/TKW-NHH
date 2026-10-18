@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AdminLTE 3</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #212529;
+            overflow-x: hidden;
+        }
+        .main-sidebar {
+            min-height: 100vh;
+            width: 250px;
+            background-color: #343a40;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1038;
+            box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
+            transition: all 0.3s ease-in-out;
+        }
+        .brand-link {
+            display: flex;
+            align-items: center;
+            padding: 0.8125rem 1rem;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,.8);
+            border-bottom: 1px solid #4b545c;
+            text-decoration: none;
+            background-color: #343a40;
+        }
+        .brand-link:hover {
+            color: #fff;
+        }
+        .brand-image {
+            float: left;
+            line-height: .8;
+            margin-right: .8rem;
+            max-height: 33px;
+            width: auto;
+        }
+        .sidebar {
+            padding-left: 0.8rem;
+            padding-right: 0.8rem;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+        }
+        .content-wrapper {
+            margin-left: 250px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f4f6f9;
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .main-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+        }
+        .main-footer {
+            background-color: #fff;
+            border-top: 1px solid #dee2e6;
+            color: #869099;
+            padding: 1rem;
+            margin-top: auto;
+        }
+        .small-box {
+            border-radius: 0.25rem;
+            box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+            display: block;
+            margin-bottom: 20px;
+            position: relative;
+            color: #fff;
+            overflow: hidden;
+        }
+        .small-box > .inner {
+            padding: 15px;
+        }
+        .small-box h3 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0 0 10px 0;
+            white-space: nowrap;
+            padding: 0;
+        }
+        .small-box p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        .small-box .icon {
+            color: rgba(0,0,0,.15);
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            z-index: 0;
+            font-size: 70px;
+            transition: all 0.3s linear;
+        }
+        .small-box:hover .icon {
+            font-size: 75px;
+        }
+        .small-box > .small-box-footer {
+            background-color: rgba(0,0,0,.1);
+            color: rgba(255,255,255,.8);
+            display: block;
+            padding: 4px 0;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            z-index: 10;
+        }
+        .small-box > .small-box-footer:hover {
+            background-color: rgba(0,0,0,.15);
+            color: #fff;
+        }
+        .card {
+            box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+            margin-bottom: 1.5rem;
+            border: 0;
+        }
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid rgba(0,0,0,.125);
+            padding: .75rem 1.25rem;
+            font-weight: 600;
+        }
+        .nav-sidebar .nav-link {
+            border-radius: 0.25rem;
+            padding: 0.6rem 0.8rem;
+            font-size: 0.95rem;
+        }
+        .nav-sidebar .nav-link:hover {
+            background-color: rgba(255,255,255,.1);
+            color: #fff !important;
+        }
+        @@media (max-width: 768px) {
+            .main-sidebar {
+                margin-left: -250px;
+            }
+            .content-wrapper {
+                margin-left: 0;
+            }
+            .sidebar-open .main-sidebar {
+                margin-left: 0;
+            }
+        }
+    </style>
+    @await RenderSectionAsync("Css", required: false)
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="brand-link">
+            <i class="fas fa-cubes text-primary fs-4 me-2"></i>
+            <span class="brand-text fw-bold">AdminLTE 3</span>
+        </a>
+        <div class="sidebar">
+            @await Component.InvokeAsync("NavLeft")
+        </div>
+    </aside>
+
+    <div class="content-wrapper">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light d-flex justify-content-between align-items-center">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <button class="btn btn-link text-dark p-0 me-3" id="sidebarToggle" type="button">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block me-3">
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nav-link p-0 text-secondary">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="nav-link p-0 text-secondary">Contact</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav align-items-center gap-3">
+                <li class="nav-item">
+                    <div class="input-group input-group-sm" style="width: 220px;">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary position-relative p-0" href="#">
+                        <i class="far fa-comments fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary position-relative p-0" href="#">
+                        <i class="far fa-bell fs-5"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 0.65rem;">15</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary p-0" href="#">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="content-header p-3 pb-2">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 fs-3 fw-bold text-dark">@ViewData["Title"]</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-end mb-0 bg-transparent p-0">
+                            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="text-decoration-none">Admin</a></li>
+                            <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content px-3 pb-4">
+            <div class="container-fluid">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                }
+                @RenderBody()
+            </div>
+        </section>
+
+        <footer class="main-footer d-flex justify-content-between align-items-center">
+            <div>
+                <strong>Bản quyền &copy; 2026 <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.</strong> Đã đăng ký bản quyền.
+            </div>
+            <div class="d-none d-sm-inline-block">
+                <b>Phiên bản</b> 3.2.0
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('sidebarToggle')?.addEventListener('click', function() {
+        document.body.classList.toggle('sidebar-open');
+    });
+</script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,55 @@
+@{
+    var controller = ViewBag.CurrentController as string ?? "";
+}
+
+<div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center border-bottom border-secondary">
+    <div class="image">
+        <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" class="rounded-circle" style="width: 36px; height: 36px;" alt="User Image">
+    </div>
+    <div class="info ms-2">
+        <a href="#" class="d-block text-white text-decoration-none fw-semibold">Alexander Pierce</a>
+        <small class="text-success"><i class="fas fa-circle fa-xs me-1"></i>Trực tuyến</small>
+    </div>
+</div>
+
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column gap-1" data-widget="treeview" role="menu">
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="nav-link text-white @(controller == "Dashboard" ? "active bg-primary" : "")">
+                <i class="nav-icon fas fa-tachometer-alt me-2"></i>
+                <span>Trang chính</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="nav-link text-white @(controller == "Category" ? "active bg-primary" : "")">
+                <i class="nav-icon fas fa-folder me-2"></i>
+                <span>Danh mục</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="nav-link text-white @(controller == "Product" ? "active bg-primary" : "")">
+                <i class="nav-icon fas fa-box me-2"></i>
+                <span>Sản phẩm</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Blog" asp-action="Index" class="nav-link text-white @(controller == "Blog" ? "active bg-primary" : "")">
+                <i class="nav-icon fas fa-newspaper me-2"></i>
+                <span>BLogs</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-area="Admin" asp-controller="Banner" asp-action="Index" class="nav-link text-white @(controller == "Banner" ? "active bg-primary" : "")">
+                <i class="nav-icon fas fa-images me-2"></i>
+                <span>Banner</span>
+            </a>
+        </li>
+        <li class="nav-header text-uppercase text-secondary small fw-bold px-3 mt-3 mb-1">Cửa hàng</li>
+        <li class="nav-item">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white">
+                <i class="nav-icon fas fa-store me-2"></i>
+                <span>Xem Website</span>
+            </a>
+        </li>
+    </ul>
+</nav>

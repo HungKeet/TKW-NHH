@@ -1,0 +1,47 @@
+@model Tuan9.Models.Product
+
+@{
+    ViewData["Title"] = "Xác nhận xóa sản phẩm";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card card-danger card-outline">
+            <div class="card-header">
+                <h3 class="card-title fs-5 m-0 text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa sản phẩm
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="text-danger fw-semibold">Bạn có chắc chắn muốn xóa sản phẩm này khỏi cơ sở dữ liệu không?</p>
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-muted">Mã sản phẩm:</dt>
+                    <dd class="col-sm-8 fw-bold">@Model.Id</dd>
+
+                    <dt class="col-sm-4 text-muted">Tên sản phẩm:</dt>
+                    <dd class="col-sm-8 fw-semibold">@Model.Name</dd>
+
+                    <dt class="col-sm-4 text-muted">Danh mục:</dt>
+                    <dd class="col-sm-8">@(Model.Category?.Name ?? "Chưa phân loại")</dd>
+
+                    <dt class="col-sm-4 text-muted">Giá niêm yết:</dt>
+                    <dd class="col-sm-8 text-danger fw-bold">@Model.Price.ToString("N0") đ</dd>
+
+                    <dt class="col-sm-4 text-muted">Trạng thái:</dt>
+                    <dd class="col-sm-8">@(Model.Status == 1 ? "Kinh doanh" : "Tạm dừng")</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Hủy bỏ
+                </a>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-1"></i>Xác nhận xóa vĩnh viễn
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

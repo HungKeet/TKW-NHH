@@ -1,0 +1,44 @@
+@model Tuan9.Models.Blog
+
+@{
+    ViewData["Title"] = "Xác nhận xóa bài viết";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card card-danger card-outline">
+            <div class="card-header">
+                <h3 class="card-title fs-5 m-0 text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa bài viết
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="text-danger fw-semibold">Bạn có chắc chắn muốn xóa bài viết này không?</p>
+                <dl class="row mb-0">
+                    <dt class="col-sm-4 text-muted">Mã bài viết:</dt>
+                    <dd class="col-sm-8 fw-bold">@Model.Id</dd>
+
+                    <dt class="col-sm-4 text-muted">Tiêu đề:</dt>
+                    <dd class="col-sm-8 fw-semibold">@Model.Name</dd>
+
+                    <dt class="col-sm-4 text-muted">Trạng thái:</dt>
+                    <dd class="col-sm-8">@(Model.Status == 1 ? "Xuất bản" : "Bản nháp")</dd>
+
+                    <dt class="col-sm-4 text-muted">Ngày đăng:</dt>
+                    <dd class="col-sm-8">@Model.CreatedDate.ToString("dd/MM/yyyy")</dd>
+                </dl>
+            </div>
+            <div class="card-footer bg-light d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i>Hủy bỏ
+                </a>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt me-1"></i>Xác nhận xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
