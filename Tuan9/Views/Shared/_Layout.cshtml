@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cửa hàng trực tuyến</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .top-bar {
+            background-color: #212529;
+            color: #adb5bd;
+            font-size: 0.85rem;
+            padding: 6px 0;
+        }
+        .header-main {
+            background-color: #fff;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .navbar-custom {
+            background-color: #0d6efd;
+            box-shadow: 0 2px 4px rgba(0,0,0,.08);
+        }
+        .navbar-custom .nav-link {
+            color: rgba(255,255,255,.9) !important;
+            font-weight: 500;
+            padding: 10px 16px !important;
+            transition: all 0.2s ease;
+        }
+        .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active {
+            color: #fff !important;
+            background-color: rgba(255,255,255,.15);
+            border-radius: 4px;
+        }
+        .footer-main {
+            background-color: #1a1e21;
+            color: #adb5bd;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-heading {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #0d6efd;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .footer-links a:hover {
+            color: #fff;
+            padding-left: 4px;
+        }
+        .product-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: #fff;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,.08);
+        }
+        .category-pill {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 30px;
+            color: #495057;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .category-pill:hover {
+            background: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
+    </style>
+    @await RenderSectionAsync("Css", required: false)
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <span class="me-3"><i class="fas fa-phone-alt me-1"></i>Hotline: 1900 6868</span>
+                <span><i class="fas fa-envelope me-1"></i>support@store.vn</span>
+            </div>
+            <div>
+                <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-warning btn-sm text-dark fw-bold py-0 px-2" style="font-size: 0.8rem;">
+                    <i class="fas fa-user-shield me-1"></i>Vào Trang Quản Trị (Admin Area)
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <header class="header-main">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="text-decoration-none">
+                        <span class="fs-3 fw-bold text-primary"><i class="fas fa-gem me-2"></i>Bistup</span>
+                        <span class="fs-5 text-secondary">Store</span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <form class="d-flex" method="get" asp-controller="Home" asp-action="Index">
+                        <div class="input-group">
+                            <input class="form-control" type="search" name="keyword" placeholder="Tìm kiếm sản phẩm, danh mục, tin tức..." aria-label="Search">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search me-1"></i>Tìm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3 text-end d-none d-md-block">
+                    <div class="d-inline-flex align-items-center gap-3">
+                        <a href="#" class="text-secondary text-decoration-none position-relative">
+                            <i class="fas fa-heart fs-4"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                        <a href="#" class="text-secondary text-decoration-none position-relative">
+                            <i class="fas fa-shopping-cart fs-4"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">3</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top p-0">
+        <div class="container">
+            <button class="navbar-toggler my-2 text-white border-white" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-home me-1"></i>Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#categories-section">
+                            <i class="fas fa-th-large me-1"></i>Danh mục
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products-section">
+                            <i class="fas fa-tshirt me-1"></i>Sản phẩm mới
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blogs-section">
+                            <i class="fas fa-newspaper me-1"></i>Tin tức
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                            <i class="fas fa-shield-alt me-1"></i>Chính sách
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-light btn-sm fw-semibold">
+                        <i class="fas fa-cogs me-1 text-primary"></i>Quản trị
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="footer-main">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-heading">Bistup Store</h5>
+                    <p class="text-secondary small">
+                        Hệ thống phân phối thời trang & phụ kiện cao cấp chính hãng. Cung cấp trải nghiệm mua sắm hiện đại, nhanh chóng và an tâm tuyệt đối cho khách hàng.
+                    </p>
+                    <p class="small mb-1"><i class="fas fa-map-marker-alt me-2 text-primary"></i>123 Đường Cầu Giấy, Hà Nội</p>
+                    <p class="small mb-1"><i class="fas fa-phone-alt me-2 text-primary"></i>1900 6868</p>
+                    <p class="small"><i class="fas fa-envelope me-2 text-primary"></i>contact@bistup.vn</p>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-heading">Danh mục</h5>
+                    <ul class="footer-links">
+                        <li><a href="#products-section">Thời trang nam</a></li>
+                        <li><a href="#products-section">Thời trang nữ</a></li>
+                        <li><a href="#products-section">Phụ kiện</a></li>
+                        <li><a href="#products-section">Giày dép thể thao</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-heading">Chính sách</h5>
+                    <ul class="footer-links">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách giao hàng</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-heading">Đăng ký nhận tin</h5>
+                    <p class="text-secondary small">Đăng ký để nhận các chương trình ưu đãi và khuyến mãi hấp dẫn nhất mỗi tuần.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email của bạn...">
+                        <button class="btn btn-primary" type="button">Đăng ký</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary my-4" />
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <small>&copy; 2026 Bistup Store - Bài thực hành số 07 ASP.NET Core MVC Layout</small>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+                    <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="text-secondary text-decoration-none small me-3">Quản trị viên</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-secondary text-decoration-none small">Bảo mật</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
