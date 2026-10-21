@@ -1,0 +1,14 @@
+/AnhKetQua/
+/DeBai/
+/HUONG_DAN_CHAY.txt
+**/bin/
+**/obj/
+**/.vs/
+*.user
+*.suo
+*.map
+*.log
+.env
+.env.*
+**/wwwroot/uploads/*
+!**/wwwroot/uploads/.gitkeep
