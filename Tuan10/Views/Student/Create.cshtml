@@ -1,0 +1,102 @@
+@model Tuan10.Models.Student
+
+@{
+    ViewData["Title"] = "Create Student";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Thêm mới sinh viên</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Student" asp-action="Create" method="post" enctype="multipart/form-data" class="mt-2">
+                        <div class="mb-3 row">
+                            <label asp-for="Name" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Name" class="form-control" placeholder="Họ tên" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="Email" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Email" type="email" class="form-control" placeholder="Email" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="Password" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="Branch" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <select asp-for="Branch" class="form-select" asp-items="Html.GetEnumSelectList<Branch>()"></select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="IsRegular" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" asp-for="IsRegular" id="isRegularCheck" />
+                                    <label class="form-check-label" for="isRegularCheck">Hệ chính quy</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="DateOfBorth" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <input asp-for="DateOfBorth" type="date" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="Gender" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                @if (ViewBag.AllGenders != null)
+                                {
+                                    @foreach (var gender in ViewBag.AllGenders)
+                                    {
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" asp-for="Gender" value="@gender" id="Gender_@gender" class="form-check-input" />
+                                            <label class="form-check-label" for="Gender_@gender">@gender</label>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label class="col-sm-3 col-form-label">Ảnh đại diện</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="avatarFile" class="form-control" accept="image/*" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label asp-for="Address" class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <textarea asp-for="Address" class="form-control" rows="3" placeholder="Địa chỉ"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-9 offset-sm-3 d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
