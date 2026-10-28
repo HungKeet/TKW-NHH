@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Learner List (Database First)";
+    Layout = "~/Views/Shared/MyLayout.cshtml";
+}
+@model IEnumerable<DBFirstApp.Models.Learner>
+
+<div class="ms-2 mx-2">
+    <h1>Learner List (Database First App)</h1>
+    <p class="text-muted">Dữ liệu được truy xuất trực tiếp từ CSDL School sử dụng các Entity Models được Scaffold tự động.</p>
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Mã</th>
+                <th>Tên</th>
+                <th>Họ</th>
+                <th>Ngành</th>
+                <th>Ngày Nhập Học</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.LearnerId</td>
+                    <td>@item.FirstMidName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Major.MajorName</td>
+                    <td>@item.EnrollmentDate.ToString("M/d/yyyy h:mm:ss tt")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.LearnerId" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.LearnerId" class="btn btn-sm btn-outline-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.LearnerId" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Create" class="btn btn-primary">Create New Student</a>
+</div>
