@@ -1,0 +1,41 @@
+﻿@model IEnumerable<NguyenHuyHung_241230739.Models.HangHoa>
+
+<div class="content_top">
+    <div class="heading">
+        <h3 id="category-title">Nguyễn Huy Hùng</h3>
+    </div>
+    <div class="see">
+        <p><a asp-controller="HangHoa" asp-action="Create">Thêm Hàng Hóa Mới</a></p>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div id="product-container">
+    <partial name="_DanhSachHangHoaPartial" model="Model" />
+</div>
+
+@section Scripts {
+    <script>
+        $(document).on("click", ".nav-loai", function (e) {
+            e.preventDefault();
+            $(".menu li").removeClass("active");
+            $(this).parent().addClass("active");
+
+            var maLoai = $(this).data("maloai");
+            var tenLoai = $(this).text();
+            $("#category-title").text(tenLoai);
+
+            $.ajax({
+                url: "/Home/HangHoaTheoLoai",
+                type: "GET",
+                data: { maLoai: maLoai },
+                success: function (data) {
+                    $("#product-container").html(data);
+                },
+                error: function () {
+                    alert("Có lỗi khi tải dữ liệu!");
+                }
+            });
+        });
+    </script>
+}
