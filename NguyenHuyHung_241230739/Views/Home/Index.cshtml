@@ -1,0 +1,39 @@
+﻿@model IEnumerable<NguyenHuyHung_241230739.Models.Sach>
+
+<div class="section-head">
+    <h3 id="section-title">NGUYỄN HUY HÙNG</h3>
+    <a href="#">Xem tất cả &rsaquo;</a>
+</div>
+
+<div id="book-container">
+    @await Html.PartialAsync("_DanhSachSachPartial", Model)
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.nav-theloai').click(function (e) {
+                e.preventDefault();
+                $('.menu li').removeClass('active');
+                $(this).parent().addClass('active');
+
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+                $('#section-title').text(name);
+
+                $.ajax({
+                    url: '/Home/SachTheoTheLoai',
+                    type: 'GET',
+                    data: { maTL: id },
+                    success: function (data) {
+                        $('#book-container').html(data);
+                    },
+                    error: function () {
+                        alert('Lỗi tải dữ liệu');
+                    }
+                });
+            });
+        });
+    </script>
+}

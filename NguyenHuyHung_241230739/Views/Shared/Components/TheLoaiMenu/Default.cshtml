@@ -1,0 +1,16 @@
+﻿@model IEnumerable<NguyenHuyHung_241230739.Models.TheLoai>
+
+<ul class="menu">
+    <li class="active">
+        <a href="javascript:void(0)" class="nav-theloai" data-id="0" data-name="NGUYỄN HUY HÙNG">NGUYỄN HUY HÙNG</a>
+    </li>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="javascript:void(0)" class="nav-theloai" data-id="@item.MaTl" data-name="@item.TenTl.ToUpper()">@item.TenTl.ToUpper()</a>
+        </li>
+    }
+    <li>
+        <a asp-controller="Sach" asp-action="Create" style="color: #ff9800; font-weight: bold;">+ Thêm sách</a>
+    </li>
+</ul>
