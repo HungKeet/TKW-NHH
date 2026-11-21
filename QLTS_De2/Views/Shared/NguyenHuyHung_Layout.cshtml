@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nguyễn Huy Hùng - 241230739</title>
+    <link href="~/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/jquery.min.js"></script>
+</head>
+<body>
+    <partial name="_NguyenHuyHung_Header" />
+    
+    <main class="main">
+        <div class="container">
+            <div class="banner"><img src="~/images/banner.jpg" alt="Banner" /></div>
+            @RenderBody()
+        </div>
+    </main>
+
+    <partial name="_NguyenHuyHung_Footer" />
+    <div class="to-top">&uarr;</div>
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

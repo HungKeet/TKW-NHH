@@ -1,0 +1,23 @@
+<header class="header">
+    <div class="topbar">
+        <div class="container">
+            <span>Phòng Hành chính - Quản trị: <b>(024) 3999 8888</b> &nbsp;|&nbsp; Hỗ trợ: taisan@assethub.vn</span>
+            <span>Xin chào, Quản trị viên &nbsp;|&nbsp; Đăng xuất</span>
+        </div>
+    </div>
+    <div class="header-main">
+        <div class="container">
+            <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="AssetHub" /></a>
+            <div class="cart-box">Nguyễn Huy Hùng - 241230739</div>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="container">
+            @await Component.InvokeAsync("LoaiTaiSanMenu")
+            <form class="search-box">
+                <input type="text" placeholder="Tìm tài sản..." />
+                <button type="button">Tìm</button>
+            </form>
+        </div>
+    </nav>
+</header>
